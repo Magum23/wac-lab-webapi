@@ -21,6 +21,12 @@ type LabAPI interface {
 	// internal registration of api routes
 	addRoutes(routerGroup *gin.RouterGroup)
 
+	// CreateLabAnalysis - Create a new laboratory analysis
+	CreateLabAnalysis(ctx *gin.Context)
+
+	// CreateSampleEvidence - Create a new sample evidence
+	CreateSampleEvidence(ctx *gin.Context)
+
 	// DeleteLabAnalysis - Delete laboratory analysis by ID
 	DeleteLabAnalysis(ctx *gin.Context)
 
@@ -39,12 +45,6 @@ type LabAPI interface {
 	// GetSampleEvidenceById - Get sample evidence by ID
 	GetSampleEvidenceById(ctx *gin.Context)
 
-	// LabAnalisis - Create a new laboratory analysis
-	LabAnalisis(ctx *gin.Context)
-
-	// SampleEvidence - Create a new sample evidence
-	SampleEvidence(ctx *gin.Context)
-
 	// UpdateLabAnalysis - Update laboratory analysis by ID
 	UpdateLabAnalysis(ctx *gin.Context)
 
@@ -60,15 +60,15 @@ func newLabAPI() LabAPI {
 	return &implLabAPI{}
 }
 
-func (this *implLabAPI) addRoutes(routerGroup *gin.RouterGroup) {
-	routerGroup.Handle(http.MethodDelete, "/lab/:laboratoryId/lab-analysis/:analysisId", this.DeleteLabAnalysis)
-	routerGroup.Handle(http.MethodDelete, "/lab/:laboratoryId/sample-evidence/:evidenceId", this.DeleteSampleEvidence)
-	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/lab-analysis", this.GetLabAnalysis)
-	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/lab-analysis/:analysisId", this.GetLabAnalysisById)
-	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/sample-evidence", this.GetSampleEvidence)
-	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/sample-evidence/:evidenceId", this.GetSampleEvidenceById)
-	routerGroup.Handle(http.MethodPost, "/lab/:laboratoryId/lab-analysis", this.LabAnalisis)
-	routerGroup.Handle(http.MethodPost, "/lab/:laboratoryId/sample-evidence", this.SampleEvidence)
-	routerGroup.Handle(http.MethodPut, "/lab/:laboratoryId/lab-analysis/:analysisId", this.UpdateLabAnalysis)
-	routerGroup.Handle(http.MethodPut, "/lab/:laboratoryId/sample-evidence/:evidenceId", this.UpdateSampleEvidence)
+func (i *implLabAPI) addRoutes(routerGroup *gin.RouterGroup) {
+	routerGroup.Handle(http.MethodPost, "/lab/:laboratoryId/lab-analysis", i.CreateLabAnalysis)
+	routerGroup.Handle(http.MethodPost, "/lab/:laboratoryId/sample-evidence", i.CreateSampleEvidence)
+	routerGroup.Handle(http.MethodDelete, "/lab/:laboratoryId/lab-analysis/:analysisId", i.DeleteLabAnalysis)
+	routerGroup.Handle(http.MethodDelete, "/lab/:laboratoryId/sample-evidence/:evidenceId", i.DeleteSampleEvidence)
+	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/lab-analysis", i.GetLabAnalysis)
+	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/lab-analysis/:analysisId", i.GetLabAnalysisById)
+	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/sample-evidence", i.GetSampleEvidence)
+	routerGroup.Handle(http.MethodGet, "/lab/:laboratoryId/sample-evidence/:evidenceId", i.GetSampleEvidenceById)
+	routerGroup.Handle(http.MethodPut, "/lab/:laboratoryId/lab-analysis/:analysisId", i.UpdateLabAnalysis)
+	routerGroup.Handle(http.MethodPut, "/lab/:laboratoryId/sample-evidence/:evidenceId", i.UpdateSampleEvidence)
 }

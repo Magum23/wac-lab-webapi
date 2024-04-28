@@ -33,6 +33,9 @@ case "$command" in
     up)
         mongo up
         ;;
+    run)
+        go run "${ProjectRoot}/cmd/lab-api-service"
+        ;;
     test)
         go test -v ./...
         ;;

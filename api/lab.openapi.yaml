@@ -46,7 +46,7 @@ paths:
       tags:
         - lab
       summary: Create a new laboratory analysis
-      operationId: labAnalisis
+      operationId: createLabAnalysis
       parameters:
         - name: laboratoryId
           in: path
@@ -187,7 +187,7 @@ paths:
       tags:
         - lab
       summary: Create a new sample evidence
-      operationId: sampleEvidence
+      operationId: createSampleEvidence
       parameters:
         - name: laboratoryId
           in: path
