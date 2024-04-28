@@ -37,6 +37,9 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/LaboratoryAnalysis"
+              examples:
+                response:
+                  $ref: "#/components/examples/LaboratoryAnalysisExample"
         "404":
           description: Laboratory not found
     post:
@@ -58,6 +61,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LaboratoryAnalysis"
+              examples:
+                updated-response:
+                  $ref: "#/components/examples/LaboratoryAnalysisExample"
         "400":
           description: Invalid input
         "404":
@@ -89,6 +95,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LaboratoryAnalysis"
+              examples:
+                response:
+                  $ref: "#/components/examples/LaboratoryAnalysisExample"
         "404":
           description: Laboratory or analysis not found
     put:
@@ -116,6 +125,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LaboratoryAnalysis"
+              examples:
+                response:
+                  $ref: "#/components/examples/LaboratoryAnalysisExample"
         "400":
           description: Invalid input
         "404":
@@ -166,6 +178,9 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/SampleEvidence"
+              examples:
+                response:
+                  $ref: "#/components/examples/SampleEvidenceExample"
         "404":
           description: Laboratory not found
     post:
@@ -187,6 +202,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SampleEvidence"
+              examples:
+                updated-response:
+                  $ref: "#/components/examples/SampleEvidenceExample"
         "400":
           description: Invalid input
         "404":
@@ -218,6 +236,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SampleEvidence"
+              examples:
+                response:
+                  $ref: "#/components/examples/SampleEvidenceExample"
         "404":
           description: Laboratory or evidence not found
     put:
@@ -245,6 +266,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SampleEvidence"
+              examples:
+                response:
+                  $ref: "#/components/examples/SampleEvidenceExample"
         "400":
           description: Invalid input
         "404":
