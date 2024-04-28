@@ -1,0 +1,349 @@
+openapi: 3.0.0
+servers:
+  - description: Cluster Endpoint
+    url: /api
+info:
+  description: Laboratory management for Web-In-Cloud system
+  version: "1.0.0"
+  title: Laboratory API
+  contact:
+    email: xmagulam@stuba.sk
+  license:
+    name: CC BY 4.0
+    url: "https://creativecommons.org/licenses/by/4.0/"
+tags:
+  - name: lab
+    description: Laboratory API
+paths:
+  "/lab/{laboratoryId}/lab-analysis":
+    get: 
+      tags:
+        - lab
+      summary: Get all laboratory analyses
+      operationId: getLabAnalysis
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of laboratory analyses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaboratoryAnalysis"
+        "404":
+          description: Laboratory not found
+    post:
+      tags:
+        - lab
+      summary: Create a new laboratory analysis
+      operationId: labAnalisis
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Laboratory analysis created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LaboratoryAnalysis"
+        "400":
+          description: Invalid input
+        "404":
+          description: Laboratory not found
+  
+  "/lab/{laboratoryId}/lab-analysis/{analysisId}":
+    get:
+      tags:
+        - lab
+      summary: Get laboratory analysis by ID
+      operationId: getLabAnalysisById
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: analysisId
+          in: path
+          description: Analysis ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A laboratory analysis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LaboratoryAnalysis"
+        "404":
+          description: Laboratory or analysis not found
+    put:
+      tags:
+        - lab
+      summary: Update laboratory analysis by ID
+      operationId: updateLabAnalysis
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: analysisId
+          in: path
+          description: Analysis ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Laboratory analysis updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LaboratoryAnalysis"
+        "400":
+          description: Invalid input
+        "404":
+          description: Laboratory or analysis not found
+    delete:
+      tags:
+        - lab
+      summary: Delete laboratory analysis by ID
+      operationId: deleteLabAnalysis
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: analysisId
+          in: path
+          description: Analysis ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Laboratory analysis deleted
+        "404":
+          description: Laboratory or analysis not found
+  
+  "/lab/{laboratoryId}/sample-evidence":
+    get:
+      tags:
+        - lab
+      summary: Get all sample evidences
+      operationId: getSampleEvidence
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of sample evidences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SampleEvidence"
+        "404":
+          description: Laboratory not found
+    post:
+      tags:
+        - lab
+      summary: Create a new sample evidence
+      operationId: sampleEvidence
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Sample evidence created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SampleEvidence"
+        "400":
+          description: Invalid input
+        "404":
+          description: Laboratory not found
+
+  "/lab/{laboratoryId}/sample-evidence/{evidenceId}":
+    get:
+      tags:
+        - lab
+      summary: Get sample evidence by ID
+      operationId: getSampleEvidenceById
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: evidenceId
+          in: path
+          description: Evidence ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A sample evidence
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SampleEvidence"
+        "404":
+          description: Laboratory or evidence not found
+    put:
+      tags:
+        - lab
+      summary: Update sample evidence by ID
+      operationId: updateSampleEvidence
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: evidenceId
+          in: path
+          description: Evidence ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Sample evidence updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SampleEvidence"
+        "400":
+          description: Invalid input
+        "404":
+          description: Laboratory or evidence not found
+    delete:
+      tags:
+        - lab
+      summary: Delete sample evidence by ID
+      operationId: deleteSampleEvidence
+      parameters:
+        - name: laboratoryId
+          in: path
+          description: Laboratory ID
+          required: true
+          schema:
+            type: string
+        - name: evidenceId
+          in: path
+          description: Evidence ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Sample evidence deleted
+        "404":
+          description: Laboratory or evidence not found
+
+components:
+  schemas:
+    LaboratoryAnalysis:
+      type: object
+      required: [id, name, analyses, results, status]
+      properties:
+        id:
+          type: string
+          example: x321ab3
+          description: Unique id of the entry in this waiting list
+        name:
+          type: string
+          example: Jožko Púčik
+          description: Name of patient
+        analyses:
+          type: array
+          items:
+            type: string
+          example: [CRP, sugar, cholesterol]
+        results:
+          type: string
+          example: "Lorem Ipsum latin results"
+        status: 
+          type: string
+          example: pending
+          description: Status of the analysis
+      example:
+        $ref: "#/components/examples/LaboratoryAnalysisExample"
+    SampleEvidence:
+      type: object
+      required: [id, name, volume, testType, result, status]
+      properties:
+        id:
+          type: string
+          example: x321ab3
+          description: Unique id of the entry in this waiting list
+        name:
+          type: string
+          example: Jožko Púčik
+          description: Name of patient
+        volume:
+          type: number
+          example: 150
+          description: Volume of the sample
+        testType:
+          type: string
+          example: blood
+          description: Type of the test
+        result:
+          type: string
+          example: positive
+          description: Result of the test
+        status:
+          type: string
+          example: pending
+          description: Status of the test
+      example:
+        $ref: "#/components/examples/SampleEvidenceExample"
+  examples:
+    LaboratoryAnalysisExample:
+      value:
+        id: x321ab3
+        name: Jožko Púčik
+        analyses: [CRP, sugar, cholesterol]
+        results: "Lorem Ipsum latin results"
+        status: pending
+    SampleEvidenceExample:
+      value:
+        id: x321ab3
+        name: Jožko Púčik
+        volume: 150
+        testType: blood
+        result: positive
+        status: pending
