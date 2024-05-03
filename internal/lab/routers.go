@@ -18,7 +18,17 @@ func AddRoutes(engine *gin.Engine) {
   group := engine.Group("/api")
   
   {
-    api := newLabAPI()
+    api := newLabAnalysesAPI()
+    api.addRoutes(group)
+  }
+  
+  {
+    api := newLabsAPI()
+    api.addRoutes(group)
+  }
+  
+  {
+    api := newSampleEvidencesAPI()
     api.addRoutes(group)
   }
   

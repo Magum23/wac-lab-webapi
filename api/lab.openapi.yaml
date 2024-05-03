@@ -12,13 +12,70 @@ info:
     name: CC BY 4.0
     url: "https://creativecommons.org/licenses/by/4.0/"
 tags:
-  - name: lab
+  - name: labs
     description: Laboratory API
+  - name: labAnalyses
+    description: Laboratory analyses API
+  - name: sampleEvidences
+    description: Sample evidences API
 paths:
+  "/lab":
+    post:
+      tags:
+        - labs
+      summary: Saves new lab definition
+      operationId: createLab
+      description: Use this method to initialize new laboratory in the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Laboratory"
+            examples:
+              request-sample:
+                $ref: "#/components/examples/LaboratoryExample"
+        description: Laboratory details to store
+        required: true
+      responses:
+        "200":
+          description: >-
+            Value of stored laboratory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Laboratory"
+              examples:
+                request-sample:
+                  $ref: "#/components/examples/LaboratoryExample"
+        "400":
+          description: Missing mandatory properties of input object.
+        "409":
+          description: Entry with the specified id already exists
+
+  "/lab/{laboratoryId}":
+    delete:
+      tags:
+        - labs
+      summary: Deletes specific laboratory
+      operationId: deleteLaboratory
+      description: Use this method to delete the specific laboratory from the system.
+      parameters:
+        - in: path
+          name: laboratoryId
+          description: pass the id of the particular laboratory
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Item deleted
+        "404":
+          description: Laboratory with such ID does not exist
+
   "/lab/{laboratoryId}/lab-analysis":
     get: 
       tags:
-        - lab
+        - labAnalyses
       summary: Get all laboratory analyses
       operationId: getLabAnalysis
       parameters:
@@ -44,7 +101,7 @@ paths:
           description: Laboratory not found
     post:
       tags:
-        - lab
+        - labAnalyses
       summary: Create a new laboratory analysis
       operationId: createLabAnalysis
       parameters:
@@ -72,7 +129,7 @@ paths:
   "/lab/{laboratoryId}/lab-analysis/{analysisId}":
     get:
       tags:
-        - lab
+        - labAnalyses
       summary: Get laboratory analysis by ID
       operationId: getLabAnalysisById
       parameters:
@@ -102,7 +159,7 @@ paths:
           description: Laboratory or analysis not found
     put:
       tags:
-        - lab
+        - labAnalyses
       summary: Update laboratory analysis by ID
       operationId: updateLabAnalysis
       parameters:
@@ -134,7 +191,7 @@ paths:
           description: Laboratory or analysis not found
     delete:
       tags:
-        - lab
+        - labAnalyses
       summary: Delete laboratory analysis by ID
       operationId: deleteLabAnalysis
       parameters:
@@ -159,7 +216,7 @@ paths:
   "/lab/{laboratoryId}/sample-evidence":
     get:
       tags:
-        - lab
+        - sampleEvidences
       summary: Get all sample evidences
       operationId: getSampleEvidence
       parameters:
@@ -185,7 +242,7 @@ paths:
           description: Laboratory not found
     post:
       tags:
-        - lab
+        - sampleEvidences
       summary: Create a new sample evidence
       operationId: createSampleEvidence
       parameters:
@@ -213,7 +270,7 @@ paths:
   "/lab/{laboratoryId}/sample-evidence/{evidenceId}":
     get:
       tags:
-        - lab
+        - sampleEvidences
       summary: Get sample evidence by ID
       operationId: getSampleEvidenceById
       parameters:
@@ -243,7 +300,7 @@ paths:
           description: Laboratory or evidence not found
     put:
       tags:
-        - lab
+        - sampleEvidences
       summary: Update sample evidence by ID
       operationId: updateSampleEvidence
       parameters:
@@ -275,7 +332,7 @@ paths:
           description: Laboratory or evidence not found
     delete:
       tags:
-        - lab
+        - sampleEvidences
       summary: Delete sample evidence by ID
       operationId: deleteSampleEvidence
       parameters:
@@ -355,6 +412,31 @@ components:
           description: Status of the test
       example:
         $ref: "#/components/examples/SampleEvidenceExample"
+    Laboratory:
+      type: object
+      required: [ "id", "name", "roomNumber"]
+      properties:
+        id:
+          type: string
+          example: laboratory-biochemistry
+          description: Unique identifier of the laboratory
+        name:
+          type: string
+          example: Biochemistry laboratory
+          description: Human readable display name of the laboratory
+        roomNumber:
+          type: string
+          example: 356 - 3rd floor
+        labAnalyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LaboratoryAnalysis'
+        sampleEvidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleEvidence'
+      example:
+        $ref: "#/components/examples/LaboratoryExample"
   examples:
     LaboratoryAnalysisExample:
       value:
@@ -371,3 +453,10 @@ components:
         testType: blood
         result: positive
         status: pending
+    LaboratoryExample:
+      value:
+        id: laboratory-biochemistry
+        name: Biochemistry laboratory
+        roomNumber: 356 - 3rd floor
+        labAnalyses: []
+        sampleEvidences: []

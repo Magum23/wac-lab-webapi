@@ -37,7 +37,7 @@ func main() {
 	engine.Use(corsMiddleware)
 
 	// setup context update  middleware
-	dbService := db_service.NewMongoService[lab.LabAPI](db_service.MongoServiceConfig{})
+	dbService := db_service.NewMongoService[lab.Laboratory](db_service.MongoServiceConfig{})
 	defer dbService.Disconnect(context.Background())
 	engine.Use(func(ctx *gin.Context) {
 		ctx.Set("db_service", dbService)

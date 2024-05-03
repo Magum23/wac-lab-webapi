@@ -1,5 +1,8 @@
 internal/lab/README.md
-internal/lab/api_lab.go
+internal/lab/api_lab_analyses.go
+internal/lab/api_labs.go
+internal/lab/api_sample_evidences.go
+internal/lab/model_laboratory.go
 internal/lab/model_laboratory_analysis.go
 internal/lab/model_sample_evidence.go
 internal/lab/routers.go
