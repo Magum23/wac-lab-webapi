@@ -7,10 +7,10 @@ command=${1:-"start"}
 ProjectRoot="$(dirname "$BASH_SOURCE")/.."
 
 # Export environment variables
-export LAB_API_ENVIRONMENT="Development"
-export LAB_API_PORT="8080"
-export LAB_API_MONGODB_USERNAME="root"
-export LAB_API_MONGODB_PASSWORD="neUhaDnes"
+export AMBULANCE_API_ENVIRONMENT="Development"
+export AMBULANCE_API_PORT="8080"
+export AMBULANCE_API_MONGODB_USERNAME="root"
+export AMBULANCE_API_MONGODB_PASSWORD="neUhaDnes"
 
 # Define the mongo function
 mongo() {
