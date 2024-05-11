@@ -74,7 +74,7 @@ func (t *implLabsAPI) CreateLab(ctx *gin.Context) {
 			http.StatusBadGateway,
 			gin.H{
 				"status":  "Bad Gateway",
-				"message": "Failed to create ambulance in database",
+				"message": "Failed to create lab in database",
 				"error":   err.Error(),
 			},
 		)

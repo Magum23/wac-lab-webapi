@@ -94,7 +94,7 @@ func (t *implLabAnalysesAPI) GetLabAnalysis(ctx *gin.Context) {
 		if result == nil {
 			result = []LaboratoryAnalysis{}
 		}
-		// return nil ambulance - no need to update it in db
+		// return nil lab - no need to update it in db
 		return nil, result, http.StatusOK
 	})
 }
@@ -122,7 +122,7 @@ func (t *implLabAnalysesAPI) GetLabAnalysisById(ctx *gin.Context) {
 			}, http.StatusNotFound
 		}
 
-		// return nil ambulance - no need to update it in db
+		// return nil lab - no need to update it in db
 		return nil, laboratory.LabAnalyses[analysisIndx], http.StatusOK
 	})
 }

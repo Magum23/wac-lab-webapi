@@ -94,7 +94,7 @@ func (t *implSampleEvidencesAPI) GetSampleEvidence(ctx *gin.Context) {
 		if result == nil {
 			result = []SampleEvidence{}
 		}
-		// return nil ambulance - no need to update it in db
+		// return nil lab - no need to update it in db
 		return nil, result, http.StatusOK
 	})
 }
@@ -122,7 +122,7 @@ func (t *implSampleEvidencesAPI) GetSampleEvidenceById(ctx *gin.Context) {
 			}, http.StatusNotFound
 		}
 
-		// return nil ambulance - no need to update it in db
+		// return nil lab - no need to update it in db
 		return nil, laboratory.SampleEvidences[sampleIndex], http.StatusOK
 	})
 }
