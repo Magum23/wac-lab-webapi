@@ -164,6 +164,22 @@ func (t *implLabAnalysesAPI) UpdateLabAnalysis(ctx *gin.Context) {
 			laboratory.LabAnalyses[analysisIndx].Id = analysis.Id
 		}
 
+		if analysis.Name != "" {
+			laboratory.LabAnalyses[analysisIndx].Name = analysis.Name
+		}
+
+		if analysis.Analyses != nil {
+			laboratory.LabAnalyses[analysisIndx].Analyses = analysis.Analyses
+		}
+
+		if analysis.Results != "" {
+			laboratory.LabAnalyses[analysisIndx].Results = analysis.Results
+		}
+
+		if analysis.Status != "" {
+			laboratory.LabAnalyses[analysisIndx].Status = analysis.Status
+		}
+
 		return laboratory, laboratory.LabAnalyses[analysisIndx], http.StatusOK
 	})
 }

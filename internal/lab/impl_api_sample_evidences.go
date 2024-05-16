@@ -1,6 +1,7 @@
 package lab
 
 import (
+	"fmt"
 	"net/http"
 	"slices"
 
@@ -160,8 +161,30 @@ func (t *implSampleEvidencesAPI) UpdateSampleEvidence(ctx *gin.Context) {
 			}, http.StatusNotFound
 		}
 
+		fmt.Println("Sample index: ", laboratory)
+
 		if sample.Id != "" {
 			laboratory.SampleEvidences[sampleIndex].Id = sample.Id
+		}
+
+		if sample.Name != "" {
+			laboratory.SampleEvidences[sampleIndex].Name = sample.Name
+		}
+
+		if sample.Result != "" {
+			laboratory.SampleEvidences[sampleIndex].Result = sample.Result
+		}
+
+		if sample.Status != "" {
+			laboratory.SampleEvidences[sampleIndex].Status = sample.Status
+		}
+
+		if sample.TestType != "" {
+			laboratory.SampleEvidences[sampleIndex].TestType = sample.TestType
+		}
+
+		if sample.Volume != -1 {
+			laboratory.SampleEvidences[sampleIndex].Volume = sample.Volume
 		}
 
 		return laboratory, laboratory.SampleEvidences[sampleIndex], http.StatusOK
